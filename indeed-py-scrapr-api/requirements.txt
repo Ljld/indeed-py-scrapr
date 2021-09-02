@@ -1,0 +1,6 @@
+bs4
+selenium
+mongoengine
+flask
+dnspython
+flask-cors

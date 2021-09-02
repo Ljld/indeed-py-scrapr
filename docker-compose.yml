@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+
+  python-api:
+    container_name: python-api
+    build:
+      context: ./indeed-py-scrapr-api
+      dockerfile: Dockerfile
+    ports:
+      - '5000:9007'
+
+  vuejs-app:
+    container_name: vuejs-app
+    build:
+      context: ./indeed-py-scrapr-app
+      dockerfile: Dockerfile
+    volumes:
+    - './indeed-py-scrapr-app:/app'
+    - '/app/node_modules'
+    ports:
+      - '8081:8080'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
