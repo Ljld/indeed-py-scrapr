@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <h1 @click="logThat">{{ msg }}</h1>
+    <h1>{{ msg }}</h1>
+    <SearchBar @search-for="loadJobs"/>
     <div class="mission-card" v-for="job in jobs" v-bind:key="job">
         <h3>{{job.title}}</h3>
         <p>
@@ -14,37 +15,43 @@
 
 <script>
 import axios from 'axios';
+import SearchBar from './SearchBar.vue'
 
 export default {
   name: 'JobCardContainer',
+  components: {
+    SearchBar
+  },
   props: {
-    msg: String
+    msg: String,
   },
   data: function () {
       return {
-        jobs: {},
-        jobDesc : "rer",
-        element: 45
+        jobs: {}
       }
   },
+  methods: {
+    test () {
+      console.log('test');
+    },
+    loadJobs (search) {
+      axios.get(search)
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.jobs = response.data;
+        console.log(this.jobs);
+        });
+    }
+  }/*,
   created() {
       axios.get(`http://127.0.0.1:5000/jobs`)
         .then(response => {
         // JSON responses are automatically parsed.
         this.jobs = response.data;
-        //console.log(response.data['0']);
-        //this.jobs = "test2";
-
-        /*response.data.forEach(job => {
-          this.jobs.push(job['title']);
-        });*/
-
-        //this.jobs = response.data['0']['title'];
         console.log(this.jobs);
-        //console.log(this.jobs[0]);
         });
 
-  }
+  }*/
 }
 </script>
 
@@ -76,10 +83,6 @@ h3 {
     /*color: #3700b3;*/
 }
 
-h3:hover {
-    /*margin-left: 10px;*/
-    /*animation: 100ms slide-right ease;*/
-}
 .mission-card {
     background-color: white;
     max-width: 30em;

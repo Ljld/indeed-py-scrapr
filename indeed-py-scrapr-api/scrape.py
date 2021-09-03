@@ -29,7 +29,7 @@ def home():
 def getJobs():
     jobs = []
     if 'search' in request.args:
-        link = "https://fr.indeed.com/Emplois-" + request.args['search']
+        link = "https://fr.indeed.com/emplois?q=" + request.args.get('search') + "&l=" + request.args.get('l')
         print(link)
         driver.get(link)
     else:

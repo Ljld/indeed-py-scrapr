@@ -1,10 +1,9 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <JobCardContainer msg="Indeed PyScrapr"/>
 </template>
 
 <script>
-import JobCardContainer from './components/JobCardContainer.vue'
+import JobCardContainer from './components/JobCardContainer.vue';
 
 export default {
   name: 'App',
