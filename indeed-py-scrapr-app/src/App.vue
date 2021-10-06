@@ -1,5 +1,5 @@
 <template>
-  <JobCardContainer msg="Indeed PyScrapr"/>
+  <JobCardContainer/>
 </template>
 
 <script>
@@ -16,7 +16,9 @@ export default {
 <style>
 * {
   margin: 0;
+  padding: 0;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,5 +28,10 @@ export default {
   margin: 0;
   background-color: #f6f6f6;
   min-height: 100vh;
+}
+
+h1 {
+  color: white;
+  font-size: 5rem;
 }
 </style>

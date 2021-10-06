@@ -63,7 +63,8 @@ def getJobs():
         json_job = {
             'title': jobTitle,
             'summary': summary,
-            'salary': salary
+            'salary': salary,
+            'link': job.get_attribute("href")
         }
 
         jobs.append(json_job)

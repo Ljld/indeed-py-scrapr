@@ -1,16 +1,21 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <SearchBar @search-for="loadJobs"/>
-    <div class="mission-card" v-for="job in jobs" v-bind:key="job">
-        <h3>{{job.title}}</h3>
-        <p>
-          {{job.summary}} <br>
-          Salary : {{job.salary}}
-        </p>
-    </div>
-    
-  </div>
+  <div>
+    <header>
+      <h1>Indeed PyScrapr</h1>
+      <SearchBar @search-for="loadJobs"/>
+    </header>
+    <section class="cards">
+      <div class="mission-card" v-for="job in jobs" v-bind:key="job">
+          <a :href="job.link">
+            <h3>{{job.title}}</h3>
+            <p>
+              {{job.summary}} <br>
+              Salary : {{job.salary}}
+            </p>
+          </a>
+      </div>
+    </section>
+  </div>  
 </template>
 
 <script>
@@ -22,41 +27,27 @@ export default {
   components: {
     SearchBar
   },
-  props: {
-    msg: String,
-  },
   data: function () {
       return {
         jobs: {}
       }
   },
   methods: {
-    test () {
-      console.log('test');
-    },
     loadJobs (search) {
-      axios.get(search)
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.jobs = response.data;
-        console.log(this.jobs);
-        });
+      axios.get(search).then(response => this.jobs = response.data);
     }
-  }/*,
-  created() {
-      axios.get(`http://127.0.0.1:5000/jobs`)
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.jobs = response.data;
-        console.log(this.jobs);
-        });
-
-  }*/
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+header {
+  background: rgb(33,12,164);
+  background: linear-gradient(184deg, rgba(33,12,164,1) 0%, rgba(19,57,202,1) 37%, rgba(7,97,236,1) 79%, rgba(0,119,255,1) 100%);
+  padding: 1em;
+  height: 12em;
+}
 
 ul {
   list-style-type: none;
@@ -66,9 +57,6 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #42b983;
-}
 
 template {
   display: flex;
@@ -76,11 +64,12 @@ template {
 }
 
 a {
-  color: #42b983;
+  color: inherit;
+  text-decoration: none;
 }
+
 h3 {
     margin-bottom: 0.2em;
-    /*color: #3700b3;*/
 }
 
 .mission-card {
@@ -101,9 +90,7 @@ h3 {
 
 .mission-card:hover {
     box-shadow: 0 8px 5px 1px rgb(64 60 67 / 16%);
-    /*border-radius: 0;*/
-    /*border-bottom-color: blue;*/
-    border-color: #3700b3;
+    border-color: #1339ca;
     
 }
 
@@ -115,16 +102,8 @@ h3 {
     margin-left: 10px;
 }
 
-.mission-card:hover > * {
-    /*animation: slide-right 100ms ease;*/
+.cards {
+  padding: 1em;
 }
 
-@keyframes slide-right {
-  0%   {
-      margin-left: 0;
-      }
-  100% {
-      
-      }
-}
 </style>
